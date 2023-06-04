@@ -6,7 +6,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use('/user', user);
-app.use('/user', task);
+app.use('/task', task);
 
 app.use((error, res, req, next) => {
   res.send(error.message);
