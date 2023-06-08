@@ -52,4 +52,17 @@ async function deleteUserDB(id) {
   }
 }
 
-module.exports = { getAllUserDB, createUserDB, updateUserDB, deleteUserDB };
+async function patchUserDB(id, clientData){
+  const client = await pool.connect();
+  const sql_select = `SELECT * FROM users WHERE id=$1`;
+  const result_select = (await client.query(sql_select,[id])).rows;
+
+  const newObj = {...result_select[0], ...clientData};
+
+  const sql_update = `UPDATE users SET name= $1, surname= $2, email= $3, pwd= $4 WHERE id=$5 returning *`;
+  const result_update = (await client.query(sql_update, [newObj.name, newObj.surname, newObj.email, newObj.name, newObj.id])).rows;
+  return result_update;
+}
+
+
+module.exports = { getAllUserDB, createUserDB, updateUserDB, deleteUserDB, patchUserDB };
