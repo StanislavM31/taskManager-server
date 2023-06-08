@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use('/user', user);
 app.use('/task', task);
 
-app.use((error, res, req, next) => {
+app.use((error, req, res, next) => {
   res.send(error.message);
 });
 
