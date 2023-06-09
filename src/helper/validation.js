@@ -23,8 +23,8 @@ function isValidTaskBody(req,res,next){
     if(!task) throw new Error("error: task is empty");
     if(!user_id) throw new Error("error: user_id is empty");
 
-    if(!isNan(task)) throw new Error("error: task is number");
-    if(isNaN(user_id)) throw new Error("error: user_id is not a number");
+    if(!isNaN(task)) throw new Error("error: task is number");
+    if(!isNaN(user_id)) throw new Error("error: user_id is not a number");
 
     if(task.length<0) throw new Error("error: task is negative");
     next();
