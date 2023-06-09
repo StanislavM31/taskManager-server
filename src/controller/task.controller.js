@@ -20,7 +20,7 @@ route.post('/', isValidTaskBody, async (req, res) => {
     res.send(error.message);
   }
 });
-route.put('/:id', isValidId, async (req, res) => {
+route.put('/:id', isValidId, isValidTaskBody,async (req, res) => {
   try {
     const{id} = req.params;
     const { task, user_id } = req.body;
