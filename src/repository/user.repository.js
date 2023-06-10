@@ -7,6 +7,13 @@ async function getAllUserDB() {
   return result;
 }
 
+async function getUserByIdDB(id){
+  const client = await pool.connect();
+  const sql = `SELECT * FROM USERS WHERE id=$1`;
+  const data = (await client.query(sql, [id])).rows;
+  return data;
+}
+
 async function createUserDB(name, surname, email, pwd) {
   const client = await pool.connect();
   try {
@@ -65,4 +72,4 @@ async function patchUserDB(id, clientData){
 }
 
 
-module.exports = { getAllUserDB, createUserDB, updateUserDB, deleteUserDB, patchUserDB };
+module.exports = { getAllUserDB, getUserByIdDB, createUserDB, updateUserDB, deleteUserDB, patchUserDB };
