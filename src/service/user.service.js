@@ -7,6 +7,7 @@ async function getAllUser() {
 
 async function getUserById(id) {
   const data = await getUserByIdDB(id);
+  if(data.length==0) throw new Error('no such ID');
   return data;
 }
 
